@@ -10,8 +10,8 @@ margin: auto;
 position:absolute;
 cursor:hand;
 z-index: 100;
-width: 60px; 
-min-width: 60px;
+width: 70px; 
+min-width: 70px;
 height: 100px; 
 min-height: 100px;
 
@@ -20,8 +20,8 @@ min-height: 100px;
 position:absolute;
 cursor:default;
 z-index: 0;
-width: 60px; 
-min-width: 60px;
+width: 70px; 
+min-width: 70px;
 height: 100px; 
 min-height: 100px;
 }
