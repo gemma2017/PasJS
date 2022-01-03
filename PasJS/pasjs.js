@@ -292,9 +292,12 @@ var Pas =
 
 
     initialize: function() {
-        document.ontouchstart = this.onLeftButtonDown;
-        document.ontouchend = this.onLeftButtonUp;
-        this.imageWidth = document.images["0"].width;
+//      document.ontouchstart = this.onLeftButtonDown;
+//      document.ontouchend = this.onLeftButtonUp;
+       document.onmousedown = this.onLeftButtonDown;
+       document.onmouseup = this.onLeftButtonUp;
+
+       this.imageWidth = document.images["0"].width;
         this.imageHeight = document.images["0"].height;
         this.charTab = new Array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F');
         this.newLayout();
@@ -340,7 +343,8 @@ var Pas =
                 evtobj.preventDefault();
             else
                 evtobj.returnValue = false;
-            document.ontouchmove = this.onMouseMove;
+//           document.ontouchmove = this.onMouseMove;
+             document.onmousemove = this.onMouseMove;
         }
         else {
             this.targetObj = null;
