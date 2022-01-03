@@ -1,15 +1,27 @@
 .back{
 position:absolute;
-z-index: 200;
+z-index: -1;
+max-width: 100%;
+max-height: 100vh;
+margin: auto;
 }
 
 .card{
 position:absolute;
 cursor:hand;
 z-index: 100;
+width: 130px; 
+min-width: 130px;
+height: 200px; 
+min-height: 200px;
+
 }
 .nodrag{
 position:absolute;
 cursor:default;
 z-index: 0;
+width: 130px; 
+min-width: 130px;
+height: 200px; 
+min-height: 200px;
 }
