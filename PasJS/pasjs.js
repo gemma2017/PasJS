@@ -25,40 +25,33 @@ var Pas =
     grab: false,
     clientX: 0,
     clientY: 0,
-    getRow:function(obj, dragBegin)
-    {
+    getRow: function(dragBegin) {
 
-        var rx = obj.clientX;
-        var ry = obj.clientY;
-        var row=-1;
+        var rx = this.clientX;
+        var ry = this.clientY;
+        var row = -1;
 
-        if(rx >= this.stLeft && rx < this.stLeft + this.imageWidth*9)
-        {
-            row = Math.floor((rx-this.stLeft)/this.imageWidth);
-            var y1 = this.stTop + this.imageHeight*(this.layout[row].length-1)/3;
-            if( dragBegin != 0 && (ry < y1 || ry >= y1 + this.imageHeight) )
+        if (rx >= this.stLeft && rx < this.stLeft + this.imageWidth * 9) {
+            row = Math.floor((rx - this.stLeft) / this.imageWidth);
+            var y1 = this.stTop + this.imageHeight * (this.layout[row].length - 1) / 3;
+            if (dragBegin != 0 && (ry < y1 || ry >= y1 + this.imageHeight))
                 row = -1;
-            return row;
         }
-	if( rx >= (this.stLeft + this.imageWidth*9.5) && rx < (this.stLeft + this.imageWidth*10.5) )
-        {
-            if(ry >= this.stTop && ry < this.stTop+this.imageHeight*4)
-            {
-		   if(dragBegin == 0)
-                       row = Math.floor((ry-this.stTop)/this.imageHeight)+9;
+        else {
+            if (rx >= (this.stLeft + this.imageWidth * 9.5) && rx < (this.stLeft + this.imageWidth * 10.5)) {
+                if (ry >= this.stTop && ry < this.stTop + this.imageHeight * 4) {
+                    if (dragBegin == 0)
+                        row = Math.floor((ry - this.stTop) / this.imageHeight) + 9;
+                }
+                else {
+                    if (ry >= this.stTop + this.imageHeight * 4 + this.imageHeight / 3 && ry < this.stTop + this.imageHeight * 6 + this.imageHeight / 3)
+                        row = Math.floor((ry - (this.stTop + this.imageHeight * 4 + this.imageHeight / 3)) / this.imageHeight) + 13;
+                }
             }
-	    return row;
         }
-	if( rx >= (this.stLeft + this.imageWidth*11) && rx < (this.stLeft + this.imageWidth*12) )
-	{
-            if(ry >= this.stTop && ry < this.stTop+this.imageHeight*2)
-	    {
-		row = Math.floor((ry-this.stTop)/this.imageHeight)+13;
-            }
-	    return row;
-	}
-	return row;
+        return row;
     },
+
     canPlace: function(row) {
         var range;
         var srcRange;
@@ -275,13 +268,13 @@ var Pas =
         }
 
 
-        document.images["54"].style.left = (this.stLeft + this.imageWidth * 11) + "px";
-        document.images["54"].style.top = this.stTop + "px";
+        document.images["54"].style.left = (this.stLeft + this.imageWidth * 9.5) + "px";
+        document.images["54"].style.top = (this.stTop + this.imageHeight * 4 + this.imageHeight / 3) + "px";
         document.images["54"].style.zIndex = 0;
         document.images["54"].style.cursor = this.dragCursor;
 
-        document.images["55"].style.left = (this.stLeft + this.imageWidth * 11) + "px";
-        document.images["55"].style.top = (this.stTop + this.imageHeight) + "px";
+        document.images["55"].style.left = (this.stLeft + this.imageWidth * 9.5) + "px";
+        document.images["55"].style.top = (this.stTop + this.imageHeight * 5 + this.imageHeight / 3) + "px";
         document.images["55"].style.zIndex = 0;
         document.images["55"].style.cursor = this.dragCursor;
 
@@ -292,12 +285,11 @@ var Pas =
 
 
     initialize: function() {
-//      document.ontouchstart = this.onLeftButtonDown;
-//      document.ontouchend = this.onLeftButtonUp;
-       document.onmousedown = this.onLeftButtonDown;
-       document.onmouseup = this.onLeftButtonUp;
-
-       this.imageWidth = document.images["0"].width;
+        document.ontouchstart = this.onLeftButtonDown;
+        document.ontouchend = this.onLeftButtonUp;
+        document.onmousedown    = this.onLeftButtonDown;
+        document.onmouseup      = this.onLeftButtonUp;
+        this.imageWidth = document.images["0"].width;
         this.imageHeight = document.images["0"].height;
         this.charTab = new Array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F');
         this.newLayout();
@@ -343,8 +335,7 @@ var Pas =
                 evtobj.preventDefault();
             else
                 evtobj.returnValue = false;
-//           document.ontouchmove = this.onMouseMove;
-             document.onmousemove = this.onMouseMove;
+            document.ontouchmove = this.onMouseMove;
         }
         else {
             this.targetObj = null;
@@ -372,10 +363,7 @@ var Pas =
             if (row < 13)
                 t = this.stTop + (row - 9) * this.imageHeight;
             else
-	    {
-	        l = this.stLeft + this.imageWidth * 11;
-                t = this.stTop + this.imageHeight * (row - 13);
-	    }
+                t = this.stTop + this.imageHeight * 4 + this.imageHeight / 3 + this.imageHeight * (row - 13);
         }
         var img = document.images[String(this.layout[row][this.layout[row].length - 1])];
         img.style.left = l + "px";
@@ -509,62 +497,5 @@ var Pas =
                 Pas.dropCard(e);
             }
         }
-    },
-    makeLayout:function( number )
-    {
-        document.images["bk"].style.left = 0+"px";
-        document.images["bk"].style.top  = 0+"px";
-         document.images["bk"].style.zIndex = -1;
-         document.images["bk"].width = 1400;
-         document.images["bk"].height = 1000;
-
-        var i,row,col,card,style;
-        this.hist = new Array();
-        this.histPos = 0;
-        this.layout = new Array(15);
-        for(i = 0; i < 15; i++)
-            this.layout[i] = new Array();
-        var cards;
-        if( number == 1)		
-	cards = new Array (27,15,49,25,48,37,21,24,46,43,28,6,12,16,2,26,9,31,29,36,50,32,40,7,3,33,17,18,22,23,45,14,11,42,19,51,38,5,1,20,10,34,47,30,44,0,39,4,41,35,52,53,8,13);
-       else
-	if(number == 2)	
-	    cards = new Array (15,3,11,10,7,13,14,32,0,21,4,24,48,51,12,37,26,50,22,23,16,25,9,30,6,31,1,8,2,17,38,19,49,45,33,20,5,43,35,39,41,27,36,18,34,44,42,29,46,47,52,28,53,40)
-
-        for(row = 0; row < 6; row++)
-        {
-            for(col = 0; col < 9; col++)
-            {
-                card = row*9+col;
-                this.layout[col].push(cards[card]);
-                style = document.images[ String(cards[card])].style;
-                style.top    = (this.stTop   + row*this.imageHeight/3 )+"px";
-                style.left   = (this.stLeft + col*this.imageWidth )+"px";
-                style.zIndex = row+1;
-                style.cursor = row == 5 ? this.dragCursor : "default";
-            }
-        }
-        for(i = 56; i < 60; i++)
-        {
-            style = document.images[String(i)].style;
-            style.top    = ( this.stTop+this.imageHeight*(i-56) )+"px";
-            style.left   = ( this.stLeft + this.imageWidth*9.5 )+"px";
-            style.zIndex = 0;
-        }
-
-
-        document.images["54"].style.left = ( this.stLeft + this.imageWidth*11)+"px";
-        document.images["54"].style.top  =  this.stTop+"px";
-        document.images["54"].style.zIndex = 0;
-        document.images["54"].style.cursor = this.dragCursor;
-
-        document.images["55"].style.left = (this.stLeft + this.imageWidth*11)+"px";
-        document.images["55"].style.top  = (this.stTop+this.imageHeight)+"px";
-        document.images["55"].style.zIndex = 0;
-        document.images["55"].style.cursor = this.dragCursor;
-
-        this.updateButtons();
-        this.makeHistStr();
-
-    }  
+    }
 }
