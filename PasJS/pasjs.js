@@ -25,33 +25,40 @@ var Pas =
     grab: false,
     clientX: 0,
     clientY: 0,
-    getRow: function(dragBegin) {
+    getRow:function(obj, dragBegin)
+    {
 
-        var rx = this.clientX;
-        var ry = this.clientY;
-        var row = -1;
+        var rx = obj.clientX;
+        var ry = obj.clientY;
+        var row=-1;
 
-        if (rx >= this.stLeft && rx < this.stLeft + this.imageWidth * 9) {
-            row = Math.floor((rx - this.stLeft) / this.imageWidth);
-            var y1 = this.stTop + this.imageHeight * (this.layout[row].length - 1) / 3;
-            if (dragBegin != 0 && (ry < y1 || ry >= y1 + this.imageHeight))
+        if(rx >= this.stLeft && rx < this.stLeft + this.imageWidth*9)
+        {
+            row = Math.floor((rx-this.stLeft)/this.imageWidth);
+            var y1 = this.stTop + this.imageHeight*(this.layout[row].length-1)/3;
+            if( dragBegin != 0 && (ry < y1 || ry >= y1 + this.imageHeight) )
                 row = -1;
+            return row;
         }
-        else {
-            if (rx >= (this.stLeft + this.imageWidth * 9.5) && rx < (this.stLeft + this.imageWidth * 10.5)) {
-                if (ry >= this.stTop && ry < this.stTop + this.imageHeight * 4) {
-                    if (dragBegin == 0)
-                        row = Math.floor((ry - this.stTop) / this.imageHeight) + 9;
-                }
-                else {
-                    if (ry >= this.stTop + this.imageHeight * 4 + this.imageHeight / 3 && ry < this.stTop + this.imageHeight * 6 + this.imageHeight / 3)
-                        row = Math.floor((ry - (this.stTop + this.imageHeight * 4 + this.imageHeight / 3)) / this.imageHeight) + 13;
-                }
+	if( rx >= (this.stLeft + this.imageWidth*9.5) && rx < (this.stLeft + this.imageWidth*10.5) )
+        {
+            if(ry >= this.stTop && ry < this.stTop+this.imageHeight*4)
+            {
+		   if(dragBegin == 0)
+                       row = Math.floor((ry-this.stTop)/this.imageHeight)+9;
             }
+	    return row;
         }
-        return row;
+	if( rx >= (this.stLeft + this.imageWidth*11) && rx < (this.stLeft + this.imageWidth*12) )
+	{
+            if(ry >= this.stTop && ry < this.stTop+this.imageHeight*2)
+	    {
+		row = Math.floor((ry-this.stTop)/this.imageHeight)+13;
+            }
+	    return row;
+	}
+	return row;
     },
-
     canPlace: function(row) {
         var range;
         var srcRange;
