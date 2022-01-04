@@ -45,7 +45,7 @@ var Pas =
                 }
                 else 
                 {
-                    if (ry >= this.stTop && ry < this.stTop + this.imageHeight * 2 && rx >= this.stLeft + this.imageWidth * 11 && rx < this.stLeft + this.imageWidth * 12)
+                    if (ry >= this.stTop && ry < (this.stTop + this.imageHeight * 2) && (rx >= this.stLeft + this.imageWidth * 11) && (rx < this.stLeft + this.imageWidth * 12))
                         row = Math.floor( (ry - this.stTop) / this.imageHeight) + 13;
                 }
             }
