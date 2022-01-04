@@ -4,7 +4,7 @@ var Pas =
 
     dragCursor: "move",
     stLeft: 50,
-    stTop: 80,
+    stTop: 85,
     srcRow: 0,
     imageWidth: 0,
     imageHeight: 0,
