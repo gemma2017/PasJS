@@ -43,9 +43,10 @@ var Pas =
                     if (dragBegin == 0)
                         row = Math.floor((ry - this.stTop) / this.imageHeight) + 9;
                 }
-                else {
-                    if (ry >= this.stTop + this.imageHeight * 4 + this.imageHeight / 3 && ry < this.stTop + this.imageHeight * 6 + this.imageHeight / 3)
-                        row = Math.floor((ry - (this.stTop + this.imageHeight * 4 + this.imageHeight / 3)) / this.imageHeight) + 13;
+                else 
+                {
+                    if (ry >= this.stTop && ry < this.stTop + this.imageHeight * 2 && rx >= this.stLeft + this.imageWidth * 11 && rx < this.stLeft + this.imageWidth * 12)
+                        row = Math.floor( (ry - this.stTop) / this.imageHeight) + 13;
                 }
             }
         }
@@ -268,13 +269,13 @@ var Pas =
         }
 
 
-        document.images["54"].style.left = (this.stLeft + this.imageWidth * 9.5) + "px";
-        document.images["54"].style.top = (this.stTop + this.imageHeight * 4 + this.imageHeight / 3) + "px";
+        document.images["54"].style.left = (this.stLeft + this.imageWidth * 11) + "px";
+        document.images["54"].style.top = this.stTop + "px";
         document.images["54"].style.zIndex = 0;
         document.images["54"].style.cursor = this.dragCursor;
 
-        document.images["55"].style.left = (this.stLeft + this.imageWidth * 9.5) + "px";
-        document.images["55"].style.top = (this.stTop + this.imageHeight * 5 + this.imageHeight / 3) + "px";
+        document.images["55"].style.left = (this.stLeft + this.imageWidth * 11) + "px";
+        document.images["55"].style.top = (this.stTop + this.imageHeight) + "px";
         document.images["55"].style.zIndex = 0;
         document.images["55"].style.cursor = this.dragCursor;
 
@@ -363,7 +364,10 @@ var Pas =
             if (row < 13)
                 t = this.stTop + (row - 9) * this.imageHeight;
             else
-                t = this.stTop + this.imageHeight * 4 + this.imageHeight / 3 + this.imageHeight * (row - 13);
+            {
+               l = this.stLeft + this.imageWidth * 11;
+                t = this.stTop + this.imageHeight * (row - 13);
+            }  
         }
         var img = document.images[String(this.layout[row][this.layout[row].length - 1])];
         img.style.left = l + "px";
