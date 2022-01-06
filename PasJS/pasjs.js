@@ -510,7 +510,7 @@ var Pas =
         for(i = 0; i < 15; i++)
             this.layout[i] = new Array();
         var cards;
-	conslole.log(number);
+	console.log(number);
 	if( number == 1)		
 		cards = new Array (27,15,49,25,48,37,21,24,46,43,28,6,12,16,2,26,9,31,29,36,50,32,40,7,3,33,17,18,22,23,45,14,11,42,19,51,38,5,1,20,10,34,47,30,44,0,39,4,41,35,52,53,8,13);
 	else if(number == 2)	
