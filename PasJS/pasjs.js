@@ -511,7 +511,8 @@ var Pas =
         	}
 	}
 	else
-	{
+	{	
+		console.log(e.clientY);
 		if (e.clientY <= Pas.stTop)
         	    return;
         	e.preventDefault();
