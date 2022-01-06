@@ -340,6 +340,7 @@ var Pas =
                 evtobj.returnValue = false;
   	    console.log("document.ontouchmove = this.onMouseMove");	
             document.ontouchmove = this.onMouseMove;
+            document.onmousemove = this.onMouseMove;
         }
         else {
             this.targetObj = null;
