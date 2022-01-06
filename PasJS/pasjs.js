@@ -311,7 +311,10 @@ var Pas =
         var evtobj = window.event ? window.event : e
         var row = this.getRow(1);
         if (row == -1)
-            return;
+	{
+		console.log("row == -1");	
+		return;
+	}
         if (this.layout[row].length == 0)
             return;
 
@@ -335,6 +338,7 @@ var Pas =
                 evtobj.preventDefault();
             else
                 evtobj.returnValue = false;
+  	    console.log("document.ontouchmove = this.onMouseMove");	
             document.ontouchmove = this.onMouseMove;
         }
         else {
