@@ -473,29 +473,66 @@ var Pas =
     },
 
     onMouseMove: function(e) {
-        if (e.targetTouches[0].pageY <= Pas.stTop)
-            return;
-        e.preventDefault();
-        Pas.clientX = e.targetTouches[0].pageX;
-        Pas.clientY = e.targetTouches[0].pageY;
-        return Pas.moveCard(e);
+	if(e.targetTouches != null)
+	{
+		if (e.targetTouches[0].pageY <= Pas.stTop)
+        	    return;
+        	e.preventDefault();
+        	Pas.clientX = e.targetTouches[0].pageX;
+        	Pas.clientY = e.targetTouches[0].pageY;
+        	return Pas.moveCard(e);
+	}
+	else
+	{
+		if (e.clientX <= Pas.stTop)
+        	    return;
+        	e.preventDefault();
+        	Pas.clientX = e.clientX;
+        	Pas.clientY = e.clientY;
+        	return Pas.moveCard(e);
+	}
     },
-    onLeftButtonDown: function(e) {
-        if (e.targetTouches[0].pageY <= Pas.stTop)
-            return;
-        e.preventDefault();
-        Pas.clientX = e.targetTouches[0].pageX;
-        Pas.clientY = e.targetTouches[0].pageY;
-        if (true) {
-            if (!Pas.grab) {
-                Pas.grab = true;
-                Pas.grabCard(e);
-            }
-        }
+    onLeftButtonDown: function(e) 
+	{	
+	if(e.targetTouches != null)
+	{
+		if (e.targetTouches[0].pageY <= Pas.stTop)
+        	    return;
+        	e.preventDefault();
+        	Pas.clientX = e.targetTouches[0].pageX;
+        	Pas.clientY = e.targetTouches[0].pageY;
+        	if (true) 
+		{
+            		if (!Pas.grab) 
+			{
+                		Pas.grab = true;
+                		Pas.grabCard(e);
+            		}
+        	}
+	}
+	else
+	{
+		if (e.clientY <= Pas.stTop)
+        	    return;
+        	e.preventDefault();
+        	Pas.clientX = e.clientX;
+        	Pas.clientY = e.clientY;
+        	if (true) 
+		{
+            		if (!Pas.grab) 
+			{
+                		Pas.grab = true;
+                	Pas.grabCard(e);
+            		}
+        	}
+
+	}
     },
     onLeftButtonUp: function(e) {
-        if (true) {
-            if (Pas.grab) {
+        if (true) 
+	{
+            if (Pas.grab) 
+	    {
                 Pas.grab = false;
                 Pas.dropCard(e);
             }
