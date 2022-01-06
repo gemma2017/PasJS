@@ -477,7 +477,9 @@ var Pas =
     },
 
     onMouseMove: function(e) {
-	if(e.targetTouches != null)
+
+	console.log("onMouseMove");
+	 if(e.targetTouches != null)
 	{
 		if (e.targetTouches[0].pageY <= Pas.stTop)
         	    return;
