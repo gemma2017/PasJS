@@ -380,6 +380,7 @@ var Pas =
         var evtobj = window.event ? window.event : e
         if (this.targetObj != null) 
 	{
+	    console.log("preventDefault");	
 	    e.preventDefault();
 	    this.targetObj.style.left = this.offsetX + this.clientX - this.x + "px";
             this.targetObj.style.top = this.offsetY + this.clientY - this.y + "px";
