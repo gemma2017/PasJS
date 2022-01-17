@@ -317,8 +317,8 @@ var Pas =
         document.ontouchend = this.onLeftButtonUp;
         document.onmousedown    = this.onLeftButtonDown;
         document.onmouseup      = this.onLeftButtonUp;
-	document.ontouchmove =    this.onMouseMove;
-	document.onmousemove = this.onMouseMove;
+	//document.ontouchmove =    this.onMouseMove;
+	//document.onmousemove = this.onMouseMove;
 
 	this.imageWidth = document.images["0"].width;
         this.imageHeight = document.images["0"].height;
@@ -370,6 +370,9 @@ var Pas =
             else
                 evtobj.returnValue = false;
   	    console.log("document.ontouchmove = this.onMouseMove");	
+	    document.ontouchmove =    this.onMouseMove;
+	    document.onmousemove = this.onMouseMove;
+		
         }
         else {
             this.targetObj = null;
@@ -643,7 +646,7 @@ function onGiveUp() {Pas.giveUp();}
 <body onLoad="Pas.initialize()">
 <P>
 <FORM>
-<INPUT TYPE="button" id = "btnBack" 	VALUE="4" onClick='onBack()'  style="height:40px; width:90px; font-size : 30px;position: absolute; left: 825px; top: 300px;">
+<INPUT TYPE="button" id = "btnBack" 	VALUE="5" onClick='onBack()'  style="height:40px; width:90px; font-size : 30px;position: absolute; left: 825px; top: 300px;">
 <INPUT TYPE="button" id = "btnForward" 	VALUE=">" onClick='onForward()' style="height:40px; width:90px; font-size : 30px;position: absolute; left: 920px; top: 300px;">
 <INPUT TYPE="button" VALUE="New" onClick='buttonClick()' style="height:40px; width:90px; font-size : 30px;position: absolute; left: 825px; top: 340px;">
 <INPUT TYPE="button" VALUE="1" onClick='on1()' style="height:40px; width:90px; font-size : 30px;position: absolute; left: 825px; top: 380px;">
